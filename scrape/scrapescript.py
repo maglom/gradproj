@@ -19,7 +19,7 @@ wines = {}
 
 
 
-DRIVER_PATH = r'C:\Users\magnu\Downloads\chromedriver_win32/chromedriver.exe'
+DRIVER_PATH = r'/Users/magnusgreve/Downloads/chromedriver'
 options = Options()
 options.add_argument("--user-data-dir=chrome-data") 
 options.headless = False
@@ -29,7 +29,7 @@ time.sleep(5)
 
 
 for i in range(2000,2022):
-    driver.get(f"https://www.wine-searcher.com/find/riesling/{i}")
+    driver.get(f"https://www.wine-searcher.com/find/bordeax/{i}/norway")
     soup = BeautifulSoup(driver.page_source)
     print('Finding wines')
     cards = soup.findAll(class_='card card-product')
