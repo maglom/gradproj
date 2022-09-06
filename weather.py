@@ -4,9 +4,9 @@ import meteostat
 import requests
 
 
-def get_weather(region):
-    start = datetime(2000, 4, 1)
-    end = datetime(2000, 9, 30)
+def get_weather(region, year):
+    start = datetime(year, 4, 1)
+    end = datetime(year, 9, 30)
 
     respons = requests.get(
         f'https://api.opencagedata.com/geocode/v1/json?q={region}&key=555c1da178f94aa4897b0393225d0776&language=en&pretty=1')
