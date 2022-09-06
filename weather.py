@@ -1,31 +1,28 @@
-#Weather.py
 from datetime import datetime
 import matplotlib.pyplot as plt
-import meteostat as ms
-
-# Set time period
-start = datetime(2000, 4, 1)
-end = datetime(2000, 9, 30)
-
-bordeaux = ms.Point(44.837788, -0.579180)
-
-# Get daily data for 2018
-data = ms.Monthly(bordeaux, start, end)
-data = data.fetch()
-
-data
-
-# Plot line chart including average, minimum and maximum temperature
-data.plot(y=['tavg', 'tmin', 'tmax'])
-plt.show()
+import meteostat
+import requests
 
 
-df = data.iloc[:,:4]
+def get_weather(region):
+    start = datetime(2000, 4, 1)
+    end = datetime(2000, 9, 30)
 
-df
-df = df.stack().reset_index()
-df = df.T
-df
+    respons = requests.get(
+        f'https://api.opencagedata.com/geocode/v1/json?q={region}&key=555c1da178f94aa4897b0393225d0776&language=en&pretty=1')
+    response = respons.json()
+
+    longlat = meteostat.Point(
+        response['results'][1]['geometry']['lat'], response['results'][1]['geometry']['lng'])
+
+    data = meteostat.Monthly(loc=longlat, start=start, end=end)
+    data = data.fetch()
+
+    df = data.iloc[:, :4]
+    df = df.stack().reset_index()
+    df = df.T
+    return df
 
 
+df = get_weather('bordeaux')
 
