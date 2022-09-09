@@ -1,7 +1,6 @@
 from datetime import datetime
 import meteostat
 import requests
-import pandas as pd
 
 
 def get_weather(location, year):
@@ -9,7 +8,7 @@ def get_weather(location, year):
     end = datetime(year, 9, 30)
 
     respons = requests.get(
-        f'https://api.opencagedata.com/geocode/v1/json?q={location}&key=555c1da178f94aa4897b0393225d0776&language=en&pretty=1')
+        f'https://api.opencagedata.com/geocode/v1/json?q={location}&key=555c1da178f94aa4897b0393225d0776&language=en&pretty=1',timeout=10)
     response = respons.json()
 
     longlat = meteostat.Point(
@@ -17,10 +16,9 @@ def get_weather(location, year):
 
     data = meteostat.Monthly(loc=longlat, start=start, end=end)
     data = data.fetch()
-    df = data.iloc[:, :4]
+    df = data[[x for x in data.columns if x != 'pres']]
     df = df.stack().reset_index()
     df = df.T
     return df
 
-get_weather('Pauillac', 2020)
 
