@@ -16,7 +16,7 @@ def get_weather(location, year):
 
     data = meteostat.Monthly(loc=longlat, start=start, end=end)
     data = data.fetch()
-    df = data[[x for x in data.columns if x != 'pres']]
+    df = data[[x for x in data.columns if x in ['tavg', 'tmin', 'tmax', 'tsun', 'prcp']]]
     df = df.stack().reset_index()
     df = df.T
     return df
