@@ -2,10 +2,13 @@ from flask import Flask, request, jsonify, render_template, url_for, redirect
 from sql.sqlfunc import query
 from tabulate import tabulate
 
-wines = query('select wine, years from viners')
+wines = query('select distinct wine from viners')
 winelist = [[''.join(x)] for x in wines]
+years = query('select distinct year from viners')
+yearlist = [[''.join(x)] for x in years]
 
-table = tabulate(winelist, tablefmt='html')
+tablewine = tabulate(winelist, tablefmt='html')
+tableyear = tabulate(yearlist, tablefmt='html')
 
 app = Flask(__name__)
 
@@ -16,7 +19,7 @@ def home():
         year = request.form['year']
         return redirect(url_for('result', wine=f'{wine} {year}'))
     else:
-        return render_template('start.html') + table
+        return render_template('start.html') + tablewine + tableyear
 
 @app.route('/<wine>')
 def result(wine):
