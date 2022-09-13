@@ -4,7 +4,7 @@ from tabulate import tabulate
 
 wines = query('select distinct wine from viners')
 winelist = [[''.join(x)] for x in wines]
-years = query('select distinct year from viners')
+years = query('select distinct years from viners')
 yearlist = [[''.join(x)] for x in years]
 
 tablewine = tabulate(winelist, tablefmt='html')
