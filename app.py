@@ -2,9 +2,9 @@ from flask import Flask, request, jsonify, render_template, url_for, redirect
 from sql.sqlfunc import query
 from tabulate import tabulate
 
-wines = query('select distinct wine from viners')
+wines = query('select distinct wine from viners order by wine asc')
 winelist = [[''.join(x)] for x in wines]
-years = query('select distinct years from viners')
+years = query('select distinct years from viners order by years asc')
 yearlist = [[''.join(x)] for x in years]
 
 tablewine = tabulate(winelist, tablefmt='html')
