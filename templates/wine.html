@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>Dropdown</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+ </head>
+ <body>
+    <select name="wine" method="GET" action="/">
+        <option value="{{wine[0]}}" selected>{{wines[0]}}</option>
+        {% for wine in wine[1:] %}
+          <option value="{{wine}}">{{wine}}</option>
+        {% endfor %}
+      </select>
+    <select name="year" method="GET" action="/">
+        <option value="{{years[0]}}" selected>{{years[0]}}</option>
+        {% for year in years[1:] %}
+          <option value="{{year}}">{{year}}</option>
+        {% endfor %}
+      </select>  
+
+ </body>
+
+
+ </html>
