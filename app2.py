@@ -18,7 +18,7 @@ def dropdown():
 "Le Pin","Pavillon Blanc du Chateau Margaux","Pavillon Rouge du Chateau Margaux","vieux Chateau Certan"
 ]
     years = ["2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"]
-    return render_template('wine.html', wines=wines, years=years)
+    return render_template('wine2.html', wines=wines, years=years)
 if __name__ == "__main__":
     app.run(debug=True)
 
