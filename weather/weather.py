@@ -55,21 +55,18 @@ def make_weather_df(interval, winedata_path):
         df_weather = pd.DataFrame(columns=weather_columns.columns)
             
         df = pd.read_csv(winedata_path)
-        df = df.iloc[:,:4]
 
         for index, row in df.iterrows():
             weather = get_weather_daily(row['Year']).iloc[2,:]
             df_weather = df_weather.append(weather)
             print(df_weather.tail(2))
             print(df_weather.shape)
-        df = df.join(df_weather)
-        return df 
+        return df_weather
     elif interval == 'monthly':
         weather_columns = get_weather_monthly(2000)
         df_weather = pd.DataFrame(columns=weather_columns.columns)
             
         df = pd.read_csv(winedata_path)
-        df = df.iloc[:,:4]
 
         for index, row in df.iterrows():
             year = int(row['Year'])
@@ -78,6 +75,5 @@ def make_weather_df(interval, winedata_path):
             df_weather = df_weather.append(weather)
             print(df_weather.tail(2))
             print(df_weather.shape)
-        df = df.join(df_weather)
-        return df 
+        return df_weather
 
