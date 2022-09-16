@@ -26,9 +26,11 @@ def index():
 def test():
     select1 = request.form.get('comp_select_y')
     select2 = request.form.get('comp_select')
-    rating = query(f"select score from viners where wine = '{select2}' and years = '{select1}'")
+    predictions = query(f"select predictions from vin where name = '{select2}' and year = '{select1}'")
+    predictions = predictions[0][0]
+    rating = query(f"select rating from vin where name = '{select2}' and year = '{select1}'")
     rating = rating[0][0]
-    return f"<H1>Wine = {select2}<br> Vintage = {select1}<br> Rating = {rating}</H1>"
+    return f"<H1>Wine = {select2}<br> Vintage = {select1}<br> Rating = {rating}<br> Predictions = {predictions}</H1>"
         
     
 
