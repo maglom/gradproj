@@ -1,0 +1,19 @@
+<form class="form-inline" method="POST" action="{{ url_for('test') }}">
+  <div class="form-group">
+    <div class="input-group">
+        <span class="input-group-addon">Please select</span>
+            <select name="comp_select" class="selectpicker form-control">
+              {% for o in data %}
+              <option value="{{ o.name }}">{{ o.name }}</option>
+              {% endfor %}
+            </select>
+        
+        <select name="comp_select_y" class="selectpicker form-control">
+                {% for i in data2 %}
+                <option value="{{ i.name }}">{{ i.name }}</option>
+                {% endfor %}
+              </select>
+    </div>
+    <button type="submit" class="btn btn-default">Go</button>
+  </div>
+</form>
